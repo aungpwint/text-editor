@@ -56,3 +56,13 @@ export interface EditorConfig {
 export interface EditorOptions {
     [key: string]: any
 }
+
+export interface EditorHistoryState {
+    canUndo: boolean
+    canRedo: boolean
+}
+
+export interface EditorSelectionState {
+    from: number
+    to: number
+}
