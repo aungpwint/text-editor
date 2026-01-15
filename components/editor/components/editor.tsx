@@ -8,6 +8,7 @@ import { useEditorStore } from '../store/editor'
 import { TextEditorProps } from '../types'
 import { EditorStatusBar } from './editor-statusbar'
 import { EditorToolbar } from './editor-toolbar'
+import { KeyboardShortcuts } from './keyboard-shortcuts'
 
 const TextEditor: React.FC<TextEditorProps> = ({
     value = '',
@@ -157,6 +158,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
             {mergedConfig.enableToolbar && editor && <EditorToolbar editor={editor} config={mergedConfig} />}
             <EditorContent editor={editor} />
             {mergedConfig.enableStatusBar && editor && <EditorStatusBar />}
+            {editor && <KeyboardShortcuts editor={editor} />}
         </div>
     )
 }
