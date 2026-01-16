@@ -1,25 +1,69 @@
-import { Bold } from 'lucide-react'
-import ActionButton from '../components/action-button'
+import {
+    AlignCenter as AlignCenterIcon,
+    AlignJustify as AlignJustifyIcon,
+    AlignLeft as AlignLeftIcon,
+    AlignRight as AlignRightIcon,
+} from 'lucide-react'
+import { ActionMenu } from '../components/action-menu'
 import { useToolbar } from '../components/toolbar-provider'
 
-interface BoldToolbarProps {
-    className?: string
-    iconClassName?: string
-}
-
-const BoldToolbar: React.FC<BoldToolbarProps> = ({ className = 'h-8 w-8', iconClassName = 'h-4 w-4' }) => {
+const AlignmentToolbar: React.FC = () => {
     const { editor } = useToolbar()
 
+    const handleAlign = (value: string) => {
+        editor.chain().focus().setTextAlign(value).run()
+    }
+
+    const currentTextAlign = () => {
+        if (editor.isActive({ textAlign: 'left' })) {
+            return 'left'
+        }
+        if (editor.isActive({ textAlign: 'center' })) {
+            return 'center'
+        }
+        if (editor.isActive({ textAlign: 'right' })) {
+            return 'right'
+        }
+        if (editor.isActive({ textAlign: 'justify' })) {
+            return 'justify'
+        }
+
+        return 'left'
+    }
+
+    const alignmentOptions = [
+        {
+            name: 'Left Align',
+            value: 'left',
+            icon: <AlignLeftIcon className="h-4 w-4" />,
+        },
+        {
+            name: 'Center Align',
+            value: 'center',
+            icon: <AlignCenterIcon className="h-4 w-4" />,
+        },
+        {
+            name: 'Right Align',
+            value: 'right',
+            icon: <AlignRightIcon className="h-4 w-4" />,
+        },
+        {
+            name: 'Justify Align',
+            value: 'justify',
+            icon: <AlignJustifyIcon className="h-4 w-4" />,
+        },
+    ]
+
     return (
-        <ActionButton
-            icon={<Bold className={iconClassName} />}
-            onClick={() => editor.chain().focus().toggleBold().run()}
-            isActive={editor.isActive('bold')}
-            disabled={!editor?.can().chain().focus().toggleBold().run()}
-            title="Bold"
-            className={className}
+        <ActionMenu
+            options={alignmentOptions}
+            currentValue={currentTextAlign()}
+            onValueChange={handleAlign}
+            disabled={!editor?.can().chain().focus().setTextAlign('left').run()}
+            tooltipText="Text Alignment"
+            label="Alignment"
         />
     )
 }
 
-export default BoldToolbar
+export default AlignmentToolbar
