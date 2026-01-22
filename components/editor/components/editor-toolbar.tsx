@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { Editor } from '@tiptap/react'
 import React from 'react'
-import { ToolbarProvider } from '../toolbar-provider'
+import { ToolbarProvider } from './toolbar-provider'
 
 import { EditorConfig } from '../types'
 
