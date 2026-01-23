@@ -1,5 +1,6 @@
 import type { Extensions } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
+import { Superscript } from '@tiptap/extension-superscript'
 import { EditorConfig } from '../types'
 
 /**
@@ -24,6 +25,7 @@ export const StarterKitExtension = StarterKit.configure({
 export const getExtensions = (config?: EditorConfig): Extensions => {
     const extensions: Extensions = [
         StarterKitExtension,
+        Superscript,
     ]
 
     return extensions
