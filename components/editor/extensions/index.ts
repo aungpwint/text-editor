@@ -1,6 +1,7 @@
 import type { Extensions } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import { Superscript } from '@tiptap/extension-superscript'
+import { FontFamily, LineHeight, TextStyle } from '@tiptap/extension-text-style'
 import { EditorConfig } from '../types'
 
 /**
@@ -26,6 +27,13 @@ export const getExtensions = (config?: EditorConfig): Extensions => {
     const extensions: Extensions = [
         StarterKitExtension,
         Superscript,
+        TextStyle,
+        LineHeight.configure({
+            types: ['textStyle'],
+        }),
+        FontFamily.configure({
+            types: ['textStyle'],
+        }),
     ]
 
     return extensions
