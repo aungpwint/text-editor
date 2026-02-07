@@ -1,6 +1,15 @@
 import { Editor } from '@tiptap/react'
 
-export type ImageAlign = 'left' | 'center' | 'right'
+export type ExtensionNameKeys = 'bold' | 'italic' | 'underline' | 'link' | 'image' | 'video' | 'audio' | 'highlight' | 'quote'
+
+export type PaperSize = 'Legal' | 'Letter' | 'Tabloid' | 'A0' | 'A1' | 'A2' | 'A3' | 'A4' | 'A5'
+
+export type Alignment = 'left' | 'center' | 'right' | 'full'
+
+export interface AlignmentConfig {
+    defaultAlign?: Alignment
+    allowedAlignments?: Alignment[]
+}
 
 export interface TextEditorProps {
     value?: string
@@ -57,6 +66,21 @@ export interface EditorOptions {
     [key: string]: any
 }
 
+export interface ToolbarButtonProps {
+    editor: Editor
+    icon: React.ReactNode
+    action: () => void
+    isActive?: () => boolean
+    tooltip?: string
+    disabled?: boolean
+}
+
+export interface BubbleMenuProps {
+    editor: Editor
+    children: React.ReactNode
+    tippyOptions?: any
+}
+
 export interface EditorHistoryState {
     canUndo: boolean
     canRedo: boolean
@@ -65,4 +89,51 @@ export interface EditorHistoryState {
 export interface EditorSelectionState {
     from: number
     to: number
+}
+
+export interface EnhancedImageAttributes {
+    src: string
+    alt?: string
+    title?: string
+    width?: number | null
+    height?: number | null
+    alignment?: Alignment
+    note?: string | null
+}
+
+export interface EnhancedImageOptions {
+    inline: boolean
+    allowBase64: boolean
+    HTMLAttributes: Record<string, any>
+    resize: {
+        enabled: boolean
+        alwaysPreserveAspectRatio: boolean
+        minWidth?: number
+        maxWidth?: number
+        minHeight?: number
+        maxHeight?: number
+    }
+    alignment: {
+        enabled: boolean
+        defaultAlignment: Alignment
+    }
+    note: {
+        enabled: boolean
+        placeholder?: string
+        editable?: boolean
+    }
+}
+
+export interface ImageNodeViewProps {
+    node: any
+    editor: Editor
+    selected: boolean
+    extension: any
+    getPos: () => number | (() => number)
+    updateAttributes: (attributes: Partial<EnhancedImageAttributes>) => void
+    deleteNode: () => void
+}
+
+export interface ImageBubbleMenuProps {
+    editor: Editor
 }
