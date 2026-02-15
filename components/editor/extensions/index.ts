@@ -6,6 +6,8 @@ import { Subscript } from '@tiptap/extension-subscript'
 import { Superscript } from '@tiptap/extension-superscript'
 import { TextAlign } from '@tiptap/extension-text-align'
 import { FontFamily, LineHeight, TextStyle } from '@tiptap/extension-text-style'
+import ImageExtension from './image'
+import { Video } from './video'
 
 import { EditorConfig } from '../types'
 
@@ -56,6 +58,52 @@ export const getExtensions = (config?: EditorConfig, EditorFloatingMenu?: any): 
             },
         }),
     ]
+
+    if (config?.enableImages) {
+        extensions.push(
+            ImageExtension.configure({
+                inline: false,
+                allowBase64: true,
+                HTMLAttributes: {
+                    class: 'enhanced-image',
+                },
+                resize: {
+                    enabled: true,
+                    directions: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+                    minWidth: 200,
+                    minHeight: 150,
+                    alwaysPreserveAspectRatio: true,
+                },
+                // alignment: {
+                //     enabled: true,
+                //     defaultAlignment: 'center',
+                // },
+                // note: {
+                //     enabled: true,
+                //     placeholder: 'Add a note...',
+                //     editable: true,
+                // },
+            }),
+        )
+    }
+
+    if (config?.enableVideos) {
+        extensions.push(
+            Video.configure({
+                inline: false,
+                containerClass: 'video-container',
+                width: '100%',
+                height: 'auto',
+                resize: {
+                    enabled: true,
+                    directions: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+                    minWidth: 200,
+                    minHeight: 150,
+                    alwaysPreserveAspectRatio: true,
+                },
+            }),
+        )
+    }
 
     if (config?.enableFloatingMenu && EditorFloatingMenu) {
         extensions.push(EditorFloatingMenu)
