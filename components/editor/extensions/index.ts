@@ -6,6 +6,7 @@ import { Subscript } from '@tiptap/extension-subscript'
 import { Superscript } from '@tiptap/extension-superscript'
 import { TextAlign } from '@tiptap/extension-text-align'
 import { FontFamily, LineHeight, TextStyle } from '@tiptap/extension-text-style'
+import { Iframe } from './iframe'
 import ImageExtension from './image'
 import { Video } from './video'
 
@@ -57,6 +58,7 @@ export const getExtensions = (config?: EditorConfig, EditorFloatingMenu?: any): 
                 nested: false,
             },
         }),
+        Iframe,
     ]
 
     if (config?.enableImages) {
