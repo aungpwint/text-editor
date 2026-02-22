@@ -3,7 +3,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { cn } from '@/lib/utils'
 import React, { forwardRef } from 'react'
 
-interface ActionButtonProps {
+export interface ActionButtonProps {
     icon?: React.ReactNode
     children?: React.ReactNode
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -16,7 +16,7 @@ interface ActionButtonProps {
     label?: string
 }
 
-const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
+export const ActionButton = forwardRef<HTMLButtonElement, ActionButtonProps>(
     ({ icon, children, onClick, isActive = false, disabled = false, title, variant = 'ghost', size = 'icon', className = 'h-8 w-8', label }, ref) => {
         const button = (
             <Button
